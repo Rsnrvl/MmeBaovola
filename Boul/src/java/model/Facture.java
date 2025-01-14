@@ -8,6 +8,8 @@ package model;
 import annoted.ColumnField;
 import annoted.TableAnnotation;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import mapping.BddObject;
 import utilities.DatePattern;
 import utilities.DateUtil;
@@ -35,6 +37,8 @@ public class Facture {
     private Integer etat;
     
     private Client MyClient;
+    
+    private List<FactureFille> filles;
     
     public Facture (){
     }
@@ -106,4 +110,35 @@ public class Facture {
     public void setEtat(Integer etat) {
         this.etat = etat;
     }
+    
+    public String getEtatString()
+    {
+        switch (this.getEtat()){
+            case 0:
+                return "Crée";
+            case 1:
+                return "Enregistré";
+            case 2:
+                return "Payé";
+            default:
+                return "";
+        }
+    }
+    
+
+    public List<FactureFille> getFilles() throws Exception{
+        if(this.getId() == null) return new ArrayList<>();  // Retourne liste vide
+        try {
+            FactureFille ff = new FactureFille();
+            ff.setIdFacture(this.getId());
+            return BddObject.find(ff, null);
+        } catch (Exception e) {
+            throw new Exception("Error getting facture filles");
+        }
+    }
+
+    public void setFilles(List<FactureFille> filles) {
+        this.filles = filles;
+    }
+    
 }

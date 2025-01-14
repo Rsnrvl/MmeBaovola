@@ -14,14 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mapping.BddObject;
-import model.Facture;
+import model.FactureFille;
 
 /**
  *
  * @author aram
  */
-@WebServlet(name = "InsertionFactureServlet", urlPatterns = {"/InsertionFactureServlet"})
-public class InsertionFactureServlet extends HttpServlet {
+@WebServlet(name = "InsertionFactureFille", urlPatterns = {"/InsertionFactureFille"})
+public class InsertionFactureFille extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +35,17 @@ public class InsertionFactureServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String date = request.getParameter("dateFacture");
-        String idClient = request.getParameter("idClient");
-        String newIdFacture = "";
+        String idFacture = request.getParameter("idFacture");
+        String idPatisserie = request.getParameter("idPatisserie");
+        String qty = request.getParameter("qty");
         
         try {
-            Facture facture = new Facture(date, idClient);
-            // Ici on recupere le ID de la Facture a inserer (Ilaina @FactureFille)
-            newIdFacture = BddObject.insertInDatabase(facture, null);
+            FactureFille ff = new FactureFille(qty, idFacture, idPatisserie);
+            BddObject.insertInDatabase(ff, null);
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-        }finally
-        {
-            RequestDispatcher rd = request.getRequestDispatcher("home.jsp?page=facture/detailFacture&&idFacture=" + newIdFacture);
+        }finally{
+            RequestDispatcher rd = request.getRequestDispatcher("home.jsp?page=facture/detailFacture&&idFacture=" + idFacture);
             rd.forward(request, response);
         }
     }

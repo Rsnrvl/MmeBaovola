@@ -7,6 +7,12 @@ package model;
 
 import annoted.ColumnField;
 import annoted.TableAnnotation;
+import database.ConnectionBase;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import mapping.BddObject;
 
 /**
@@ -33,6 +39,49 @@ public class Patisserie {
     private Parfum MyParfum;
     
     private Categorie MyCategorie;
+    
+    public static Map<String, Integer> getVenteByCategorieAndParfum(String idCatego, String idParf, Connection connection) throws Exception
+    {
+        Map<String, Integer> result = new HashMap<>();
+        boolean isOpen = false;
+        ConnectionBase cb = new ConnectionBase();
+        if(connection == null){
+            connection = cb.dbConnect();     // If it is null, creating connection
+        }else{
+            isOpen = true;
+        }
+        PreparedStatement pm = null;
+        ResultSet resultSet = null;
+       
+        try {
+            String sqlQuery = "select \n" +
+                "    nompatisserie, \n" +
+                "    sum(quantite) \n" +
+                "from v_vente_avec_categorie_parfum \n" +
+                "where idcategorie = ? and idparfum = ? \n" +
+                "group by nompatisserie";
+            pm = connection.prepareStatement(sqlQuery);
+            pm.setString(1, idCatego);
+            pm.setString(2, idParf);
+            resultSet = pm.executeQuery();
+            while (resultSet.next()) {
+                // Retrieve the sum of prices from the result set
+                String nom = resultSet.getString(1);
+                int sum = resultSet.getInt(2);
+                result.put(nom, sum);
+            }   
+            return  result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error on getting search by categorie and by parfum. "+ e.getMessage());
+        } finally{
+            resultSet.close();
+            pm.close();
+            if(isOpen == false) connection.close();
+        }
+    }
+    
+    
 
     public Patisserie(String nomPatisserie, String prixUnitaire, String idCategorie, String idParfum) throws Exception {
         try {

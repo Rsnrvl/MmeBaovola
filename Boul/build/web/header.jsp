@@ -8,6 +8,9 @@
 <%@page import="model.*"%>--%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    
+%>
 
 
 <!--<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -37,11 +40,11 @@
                 <div class="dropdown-menu bg-transparent border-0">
                     <a 
                         data-bs-toggle="modal" 
-                        data-bs-target="#benefice" 
+                        data-bs-target="#vente_cat_parf" 
                         class="dropdown-item"
                     > 
                         <i class="fa fa-chevron-right me-2"></i> 
-                        Benefice entre 2 prix
+                        Vente/cat/parfum
                     </a>     
                      <a 
                         data-bs-toggle="modal" 
@@ -314,7 +317,7 @@
     <!--  LOGOUT USER START -->
     
    <!-- MODAL MATIERE PREMIERE FOR POKETRA -->
-    <div class="modal fade" id="benefice" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="vente_cat_parf" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content" >
             <div class="modal-header">

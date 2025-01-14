@@ -42,17 +42,21 @@ public class FactureFille {
     public FactureFille() {
     }
     
+    // Eto isika maka an'ilay Patisserie(idPatisserie) nofidinle olona
+    // Sy ny qty
+    // Dia satria efa manana ny idPatisserie => Afaka mahazo ny PU anle patisserie
+    // => moontant = qty * pu (Denormalisation)
     public FactureFille(String quantite,  String idFacture, String idPatisserie) throws Exception{
        try { 
             this.setQuantite(quantite);
             this.setIdFacture(idFacture);
             this.setIdPatisserie(idPatisserie);
+            this.setPuPatisserie(this.getMyPatisserie().getPrixUnitaire());
+            this.setMontantTotal(this.getPuPatisserie() * this.getQuantite());
        } catch (Exception e) {
        throw new Exception("erreur " + e.getMessage());
        }
     }
-
-    
     
     public String getId() {
         return id;
@@ -87,6 +91,7 @@ public class FactureFille {
         this.puPatisserie = puPatisserie;
     }
     
+    // DU coup izany on n'a plus besoin de ca
     public void setPuPatisserie(String puPatisserieHtml) throws Exception {
         try{
             Double valeur = Double.valueOf(puPatisserieHtml);
@@ -104,6 +109,7 @@ public class FactureFille {
         this.montantTotal = montantTotal;
     }
     
+    // Idem, on n'a plus besoin de ca
      public void setMontantTotal(String montantTotalHtml) throws Exception {
         try{
             Double valeurMt = Double.valueOf(montantTotalHtml);
