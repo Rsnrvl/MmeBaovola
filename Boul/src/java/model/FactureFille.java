@@ -42,12 +42,11 @@ public class FactureFille {
     public FactureFille() {
     }
     
-    public FactureFille(String quantite, String puPatisserie, String montantTotal, String idFacture, String idPatisserie) throws Exception{
-       try { this.setQuantite(quantite);
-        this.setPuPatisserie(puPatisserie);
-        this.setMontantTotal(montantTotal);
-        this.setIdFacture(idFacture);
-        this.setIdPatisserie(idPatisserie);
+    public FactureFille(String quantite,  String idFacture, String idPatisserie) throws Exception{
+       try { 
+            this.setQuantite(quantite);
+            this.setIdFacture(idFacture);
+            this.setIdPatisserie(idPatisserie);
        } catch (Exception e) {
        throw new Exception("erreur " + e.getMessage());
        }

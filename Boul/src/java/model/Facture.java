@@ -27,6 +27,13 @@ public class Facture {
     @ColumnField(column="idClient")
     private String idClient;
     
+    // Etat ana facture
+    // 0 : Creer fotsiny ilay facture
+    // 1 : Enregistrer ilay facture (Validée)
+    // 10 : Payée (ohatra : Afaka asina etat bdb ny facture zay tina)
+    @ColumnField(column="etat")
+    private Integer etat;
+    
     private Client MyClient;
     
     public Facture (){
@@ -36,6 +43,7 @@ public class Facture {
         try {
         this.setDateFacture(dateFacture);
         this.setIdClient(idClient);
+        this.setEtat(0); // Creation facture : 0
         } catch (Exception e) {
         throw new Exception("Erreur constructeur Facture" + e.getMessage());
         }
@@ -90,5 +98,12 @@ public class Facture {
     public void setMyClient(Client MyClient) {
         this.MyClient = MyClient;
     }
-    
+
+    public Integer getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Integer etat) {
+        this.etat = etat;
+    }
 }

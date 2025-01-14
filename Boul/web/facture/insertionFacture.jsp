@@ -18,6 +18,16 @@
         <h6 class="mb-4">Inserer Nouvelle Facture</h6>
         <form method="POST" action="InsertionFactureServlet">
             
+        <div class="form-floating mb-3">
+            <input 
+                type="date" 
+                name="dateFacture" 
+                class="form-control" 
+                id="floatingInput"
+                placeholder="name@example.com"
+            >
+            <label for="floatingInput"> Date  </label>
+        </div>
          <div class="form-floating mt-3 mb-3">
                 <select 
                     class="form-select" 
@@ -33,20 +43,8 @@
                         <% }
                     %>
                 </select>
-                <label for="floatingSelect"> Categorie</label>
+                <label for="floatingSelect"> Clients</label>
             </div>
-         
-                <div class="form-floating mb-3">
-                <input 
-                    type="number" 
-                    name="quantite" 
-                    class="form-control" 
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                >
-                <label for="floatingInput"> Quantite </label>
-            </div>
-                
             
             <button type="submit" class="btn btn-primary"> Enregistrer </button>
         </form>

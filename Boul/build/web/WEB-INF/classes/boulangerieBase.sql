@@ -1,3 +1,11 @@
+--------------------------------------------------------------------
+create sequence cat_seq increment by 1 start with 1;
+CREATE TABLE categorie(
+idCategorie varchar(100) primary key not null,
+nomCategorie varchar(100)
+);
+---------------------------------------------------
+
 CREATE TABLE unite (
 idUnite varchar(50) primary key not null,
 nom varchar(50)
@@ -36,7 +44,7 @@ foreign key (idCategorie) references categorie(idCategorie),
 foreign key (idParfum) references parfum(idParfum)
 );
 -------------------------------------------------
-create sequence emp_seq incremnet by 1 start with 1;
+create sequence emp_seq increment by 1 start with 1;
 CREATE TABLE employe (
 idEmploye varchar(100) primary key not null,
 nomEmploye varchar(100),
@@ -74,12 +82,5 @@ foreign key (idFacture) references facture(idFacture),
 foreign key (idPatisserie) references patisserie(idPatisserie)
 );
 --------------------------------------------------------------------
---------------------------------------------------------------------
-create sequence cat_seq increment by 1 start with 1;
-CREATE TABLE categorie(
-idCategorie varchar(100) primary key not null,
-nomCategorie varchar(100)
-);
----------------------------------------------------
 
 
